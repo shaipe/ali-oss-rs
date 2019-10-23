@@ -1,5 +1,6 @@
 use reqwest::Client;
 use crate::base64;
+use md5::digest::FixedOutput;
 /**
  * 
 Authorization = "OSS " + AccessKeyId + ":" + Signature
@@ -56,8 +57,9 @@ pub fn content_md5(text: &str) -> String {
     // }
     let mut m = Md5::default();
     m.input(text.as_bytes());
-    let digest = m.result();
-    let new_sign = format!("{:x}", digest);
-    println!("{:?}", new_sign);
-    base64::encode(new_sign.as_bytes())
+    //m.fixed_result();
+    //println!("ssss{:?}",m.buffer);
+    let digest = m.fixed_result();
+    println!("{:?}", base64::encode(&digest));
+    base64::encode(&digest)
 }
