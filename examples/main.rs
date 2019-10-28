@@ -1,17 +1,17 @@
 extern crate ali_oss;
 
-use ali_oss::OSSConfig;
+// use ali_oss::OSSConfig;
 use ali_oss::content_md5;
 use ali_oss::content_sha1;
 extern crate chrono;
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Utc,Local};
 
 extern crate reqwest;
 fn main() {
     let now: DateTime<Utc> = Utc::now();
     let format_time=now.to_rfc2822().to_string().replace("+0000","GMT");
-    println!("{:?},{:?},{:?}",format_time,now.to_rfc2822(),now.to_rfc3339());
-    let c: OSSConfig = OSSConfig::new();
+    println!("{:?},{:?},{:?}",format_time,now.to_rfc2822(),Local::now().naive_utc());
+    // let c: OSSConfig = OSSConfig::new();
     let md5_value=content_md5("0123456789");
     //println!("{:?}", c);
     //println!("{:?}", md5_value);
