@@ -1,6 +1,10 @@
 use reqwest::Client;
 use crate::base64;
 use md5::digest::FixedOutput;
+extern crate sha1;
+extern crate hmacsha1;
+use hmacsha1::hmac_sha1;
+use md5::{Md5, Digest};
 /**
  * 
 Authorization = "OSS " + AccessKeyId + ":" + Signature
@@ -35,7 +39,7 @@ impl AliClient{
 
 
 }
-use md5::{Md5, Digest};
+
 // 对签名的内容进行content-md5计算
 pub fn content_md5(text: &str) -> String {
 
@@ -60,6 +64,11 @@ pub fn content_md5(text: &str) -> String {
     //m.fixed_result();
     //println!("ssss{:?}",m.buffer);
     let digest = m.fixed_result();
+    println!("{:?}", base64::encode(&digest));
+    base64::encode(&digest)
+}
+pub fn content_sha1(key:&str,text: &str) -> String {
+    let digest = hmac_sha1(key.as_bytes(),text.as_bytes());
     println!("{:?}", base64::encode(&digest));
     base64::encode(&digest)
 }
