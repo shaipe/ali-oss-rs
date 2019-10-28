@@ -1,4 +1,5 @@
 
+#[allow(dead_code)]
 pub enum OSSHeaders {
     AcceptEncoding,
     Authorization,

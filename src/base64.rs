@@ -11,6 +11,7 @@ const CHARMAP: [u8; 65] = [
     0x3D // << extra byte for padding
 ];
 
+#[allow(dead_code)]
 fn lookup(c: u8) -> u8 {
     match CHARMAP.iter().position(|x| *x == c) {
         Some(f) => {
@@ -55,6 +56,7 @@ pub extern fn encode(bytes: &[u8]) -> String {
 }
 
 /// Base64解密
+#[allow(dead_code)]
 pub extern fn decode(string: &str) -> Vec<u8> {
     let mut decoded_data: Vec<u8> = Vec::new();
     let bytes = string.as_bytes();
