@@ -1,3 +1,7 @@
+// Copyright
+//! Licensed under the Apache License, Version 2.0 (the "License");
+//! bas64加解密码方法
+//! 
 
 const CHARMAP: [u8; 65] = [
     0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48,

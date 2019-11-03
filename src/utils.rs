@@ -1,6 +1,9 @@
+// Copyright © Shaipe
+//! 项目对接公用方法
+
 use crate::base64;
 
-// 获取内容的md5加密码,使用的是128位模式下的base64编码
+/// 获取内容的md5加密码,使用的是128位模式下的base64编码
 pub fn content_md5(text: &str) -> String {
     use md5::{Md5, Digest};
     use md5::digest::FixedOutput;
@@ -11,7 +14,7 @@ pub fn content_md5(text: &str) -> String {
     base64::encode(&digest)
 }
 
-// 获取hmac_sha1的加密码方式
+/// 获取hmac_sha1的加密码方式
 pub fn content_sha1(key:&str, text: &str) -> String {
     use hmacsha1::hmac_sha1;
     // println!("{:?}, text: {:?}", key, text);
@@ -20,7 +23,7 @@ pub fn content_sha1(key:&str, text: &str) -> String {
     base64::encode(&digest)
 }
 
-// 获取资源名称
+/// 获取资源名称
 pub fn get_resource(bucket_name: &str, object_name: &str, sub_resource: &str) -> String {
     let resource = if sub_resource != "" {
         format!("?{}", sub_resource)
@@ -36,7 +39,7 @@ pub fn get_resource(bucket_name: &str, object_name: &str, sub_resource: &str) ->
     return format!("/{}/{}{}", bucket_name, object_name, resource);
 }
 
-// 获取GMT格式的当前时间
+/// 获取GMT格式的当前时间
 pub fn get_now_gmt() -> String {
     use chrono::{DateTime, Utc};
     let now: DateTime<Utc> = Utc::now();

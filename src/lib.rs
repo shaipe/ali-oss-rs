@@ -1,3 +1,7 @@
+// Copyright
+//! aliyun oss sdk for Rust
+//! 
+
 #[macro_use] extern crate lazy_static;
 
 extern crate reqwest;

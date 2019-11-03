@@ -1,3 +1,7 @@
+// Copyright
+//! oss对接配置提供存入静态缓存中
+
+
 use std::collections::HashMap; 
 use std::sync::Mutex;
 use std::io::prelude::*;

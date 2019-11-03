@@ -1,3 +1,6 @@
+// Copyright
+//! Oss 对象中的常量对接
+//! 
 
 #[allow(dead_code)]
 pub enum OSSHeaders {
