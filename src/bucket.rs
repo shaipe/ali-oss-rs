@@ -1,6 +1,8 @@
 // Copyright
 //! 
-
+//! 
+// mod service;
+// use service::put_object;
 #[derive(Debug, Clone)]
 pub struct BucketContent {
     pub key: String,
@@ -24,7 +26,7 @@ impl BucketContent {
 #[allow(dead_code)]
 pub fn put_object(object_key: &str) {
     println!("{:?}", object_key);
-
+    //put_object("");
 }
 
 #[allow(dead_code)]

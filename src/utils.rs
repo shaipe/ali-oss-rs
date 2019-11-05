@@ -13,7 +13,15 @@ pub fn content_md5(text: &str) -> String {
     let digest = m.fixed_result();
     base64::encode(&digest)
 }
-
+pub fn content_md52(bytes: &Vec<u8>) -> String {
+    use md5::{Md5, Digest};
+    use md5::digest::FixedOutput;
+    let mut m = Md5::default();
+    m.input(bytes);
+    // 获取原固定的128位的u8
+    let digest = m.fixed_result();
+    base64::encode(&digest)
+}
 /// 获取hmac_sha1的加密码方式
 pub fn content_sha1(key:&str, text: &str) -> String {
     use hmacsha1::hmac_sha1;
@@ -24,21 +32,19 @@ pub fn content_sha1(key:&str, text: &str) -> String {
 }
 
 /// 获取资源名称
-pub fn get_resource(bucket_name: &str, object_name: &str, sub_resource: &str) -> String {
+pub fn get_resource(bucket_name: &str, object_name: &str, sub_resource: &str,source_path:&str) -> String {
     let resource = if sub_resource != "" {
         format!("?{}", sub_resource)
     }
     else{
         "".to_owned()
     };
-
     if bucket_name == "" {
-        return format!("/{}{}", object_name, resource);
+        return format!("/{}{}{}", object_name, resource,source_path);
     }
 
-    return format!("/{}/{}{}", bucket_name, object_name, resource);
+    return format!("/{}{}{}{}", bucket_name, object_name, resource,source_path);
 }
-
 /// 获取GMT格式的当前时间
 pub fn get_now_gmt() -> String {
     use chrono::{DateTime, Utc};
