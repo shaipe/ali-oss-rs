@@ -17,6 +17,7 @@ pub mod service;
 // mod md5;
 
 // pub use config::OSSConfig;
-pub use client::*;
-pub use md5::*;
-pub use utils::*;
+// use client::*;
+// use md5::*;
+// use utils::*;
+pub use config::{OSSConfig, set_oss_config};

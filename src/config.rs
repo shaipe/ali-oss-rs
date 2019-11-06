@@ -31,6 +31,7 @@ impl Default for OSSConfig {
 }
 
 impl OSSConfig{
+
     pub fn new(conf_path: &str) -> Self {
         // 给定默认值
         let file_path = if conf_path.len() == 0 {
@@ -66,12 +67,12 @@ lazy_static! {
 }
 
 /// 设置代码配置到全局缓存变量
-pub fn set_config(proxy: OSSConfig){
+pub fn set_oss_config(proxy: OSSConfig){
     PROXY_CACHES.lock().unwrap().insert("oss_config".to_owned(), proxy);
 }
 
 /// 从全局变量中获取代理配置
-pub fn get_config() -> OSSConfig {
+pub fn get_oss_config() -> OSSConfig {
     let cache = PROXY_CACHES.lock().unwrap(); 
     let cnf = match cache.get("oss_config") {
         Some(val) => val.clone(),

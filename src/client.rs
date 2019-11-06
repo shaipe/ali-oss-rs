@@ -5,7 +5,7 @@
 use reqwest::{Client, RequestBuilder};
 use http::Method;
 use crate::consts::OSSHeaders;
-use crate::config::{get_config, OSSConfig};
+use crate::config::{get_oss_config, OSSConfig};
 use reqwest::header::{HeaderMap};
 
 pub struct AliClient{
@@ -21,7 +21,7 @@ impl AliClient{
     pub fn new() -> Self {
         AliClient{ 
             client: Client::new(),
-            config: get_config()
+            config: get_oss_config()
         }
     }
 
@@ -67,7 +67,7 @@ impl AliClient{
         // headers.insert(key: K, val: T)
 
 
-        let content_md5 =utils::content_md52(&content);
+        let content_md5 =utils::content_md5(&content);
         let now_gmt = utils::get_now_gmt();
         let resource =utils::get_resource(&self.config.bucket_name, "", "",source_path);
         // VERB, Content-MD5, Content-Type, Date, CanonicalizedOSSHeaders, CanonicalizedResource
