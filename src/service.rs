@@ -62,6 +62,7 @@ pub fn get_buckets(profix: &str, marker: &str, max_keys: i64) -> String {
 
     "".to_owned()
 }
+//上传
 pub fn put_object(path_file: &str) -> String {
     let mut f = File::open(path_file).unwrap();
     let mut buf = Vec::new();
@@ -88,9 +89,32 @@ pub fn put_object(path_file: &str) -> String {
     print!("{:?}", xml);
     xml
 }
+//删除一张
 pub fn del_object(key: &str) -> String {
     let mut c = AliClient::new();
     let res = c.do_request(http::Method::DELETE, Vec::new(), "", key);
+    let xml = res.unwrap().text().unwrap();
+    print!("{:?}", xml);
+    xml
+}
+//删除多张
+pub fn del_mult_object(keys: Vec<&str>) -> String {
+    let mut c = AliClient::new();
+    let mut v:Vec<String>=Vec::new();
+    for key in keys{
+        v.push(format!("
+    <Object> 
+        <Key>{}</Key> 
+    </Object>",key));
+    }
+    //Quiet=false 关闭简单响应模式
+   let data= format!("<?xml version='1.0' encoding='UTF-8'?>
+    <Delete>
+    <Quiet>false</Quiet>
+    {}
+    </Delete>
+    ",v.join(""));
+    let res = c.do_request(http::Method::POST, data.as_bytes().to_vec(), "", "/?delete");
     let xml = res.unwrap().text().unwrap();
     print!("{:?}", xml);
     xml
