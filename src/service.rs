@@ -88,3 +88,10 @@ pub fn put_object(path_file: &str) -> String {
     print!("{:?}", xml);
     xml
 }
+pub fn del_object(key: &str) -> String {
+    let mut c = AliClient::new();
+    let res = c.do_request(http::Method::DELETE, Vec::new(), "", key);
+    let xml = res.unwrap().text().unwrap();
+    print!("{:?}", xml);
+    xml
+}

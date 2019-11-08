@@ -8,6 +8,8 @@ fn main() {
     // println!("{:?}", cnf);
     //let s = service::get_buckets("", "", 100);
     //println!("{:?}", s);
-    service::put_object(r#"E:\rust\ali-oss-rs\QQ图片20190718094751.jpg"#);
-    
+    //上传
+    //service::put_object(r#"E:\rust\ali-oss-rs\QQ图片20190718094751.jpg"#);
+    //删除
+    service::del_object(r#"/picture/QQ图片20190718094751.jpg"#);
 }

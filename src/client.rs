@@ -36,8 +36,9 @@ impl AliClient{
         println!("url:{:?}",source_path);
         let req: RequestBuilder = self.client.request(method.clone(), &url).body(content.clone());
         let m=match method{
-            Method::GET=>"GET",
-            _=>"PUT"
+            Method::PUT=>"PUT",
+            Method::DELETE=>"DELETE",
+            _=>"GET"
         };
         let headers: reqwest::header::HeaderMap = self.get_auth_headers(m,content,content_type,source_path.as_str());
         req.headers(headers).send()
@@ -72,7 +73,7 @@ impl AliClient{
         let resource =utils::get_resource(&self.config.bucket_name, "", "",source_path);
         // VERB, Content-MD5, Content-Type, Date, CanonicalizedOSSHeaders, CanonicalizedResource
         let sign_str = format!("{}\n{}\n{}\n{}\n{}{}", method, content_md5, content_type, now_gmt.clone(), "", resource);
-        println!("sign_str={:?}",sign_str);
+        //println!("sign_str={:?}",sign_str);
         let authorization_str = format!("OSS {}:{}", self.config.access_key_id, utils::content_sha1(&self.config.access_key_secret, &sign_str));
         headers.insert(OSSHeaders::ContentMD5.as_str(), content_md5.parse().unwrap());
         headers.insert(OSSHeaders::ContentType.as_str(), content_type.parse().unwrap());
@@ -80,7 +81,7 @@ impl AliClient{
         headers.insert(OSSHeaders::Host.as_str(), self.config.endpoint.parse().unwrap());
         headers.insert(OSSHeaders::Authorization.as_str(), authorization_str.parse().unwrap());
         headers.insert(OSSHeaders::UserAgent.as_str(), "rust-sdk-client/0.1.0".parse().unwrap());
-        println!("headers={:?}",headers);
+        //println!("headers={:?}",headers);
 
         headers
     }
