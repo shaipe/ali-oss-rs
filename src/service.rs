@@ -1,4 +1,4 @@
-// Copyright
+// Copyright (c) Shaipe 
 //! Licensed under the Apache License, Version 2.0 (the "License")
 //!
 //!
@@ -11,6 +11,8 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::str::from_utf8;
 use regex::Regex;
+
+/// 获取bucket列表
 pub fn get_buckets(profix: &str, marker: &str, max_keys: i64) -> String {
     println!("{:?}, {:?}, {:?}", profix, marker, max_keys);
     let mut c = AliClient::new();
@@ -62,7 +64,9 @@ pub fn get_buckets(profix: &str, marker: &str, max_keys: i64) -> String {
 
     "".to_owned()
 }
-//上传
+
+/// 上传单个对象到oss中
+/// param1: 本地文件对象路径
 pub fn put_object(path_file: &str) -> String {
     let mut f = File::open(path_file).unwrap();
     let mut buf = Vec::new();
@@ -89,7 +93,9 @@ pub fn put_object(path_file: &str) -> String {
     print!("{:?}", xml);
     xml
 }
-//删除一张
+
+/// 从oss中删除单个对象
+/// param1: 文件对象路径
 pub fn del_object(key: &str) -> String {
     let mut c = AliClient::new();
     let res = c.do_request(http::Method::DELETE, Vec::new(), "", key);
@@ -97,7 +103,9 @@ pub fn del_object(key: &str) -> String {
     print!("{:?}", xml);
     xml
 }
-//删除多张
+
+/// 删除多个文件对象
+/// param1: 对象路径集合 [&str]
 pub fn del_mult_object(keys: Vec<&str>) -> String {
     let mut c = AliClient::new();
     let mut v:Vec<String>=Vec::new();

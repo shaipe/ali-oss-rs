@@ -18,6 +18,7 @@ pub struct OSSConfig {
     pub bucket_name: String
 }
 
+/// OSS配置默认实现
 impl Default for OSSConfig {
     fn default() -> Self {
         OSSConfig{
@@ -30,6 +31,7 @@ impl Default for OSSConfig {
     }
 }
 
+/// OSS配置新实现
 impl OSSConfig{
 
     pub fn new(conf_path: &str) -> Self {
