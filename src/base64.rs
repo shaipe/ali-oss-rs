@@ -1,4 +1,4 @@
-// Copyright
+// Copyright © Shaipe
 //! Licensed under the Apache License, Version 2.0 (the "License");
 //! bas64加解密码方法
 //! 

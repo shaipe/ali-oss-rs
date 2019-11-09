@@ -1,4 +1,4 @@
-// Copyright
+// Copyright © Shaipe
 //! Oss 对象中的常量对接
 //! 
 

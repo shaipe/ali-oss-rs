@@ -1,4 +1,4 @@
-// Copyright
+// Copyright © Shaipe
 //! 请求客户端
 
 
@@ -8,6 +8,7 @@ use crate::consts::OSSHeaders;
 use crate::config::{get_oss_config, OSSConfig};
 use reqwest::header::{HeaderMap};
 
+/// 阿里云请求客户端
 pub struct AliClient{
     // 请求的客户端对象
     client: Client,
@@ -17,7 +18,7 @@ pub struct AliClient{
 
 
 impl AliClient{
-
+    /// 创建一个新客户端对象
     pub fn new() -> Self {
         AliClient{ 
             client: Client::new(),
@@ -25,7 +26,7 @@ impl AliClient{
         }
     }
 
-    // 执行请求
+    /// 执行请求
     pub fn do_request(&mut self, method: Method,content:Vec<u8>,content_type:&str,key:&str) -> Result<reqwest::Response, reqwest::Error> {
         let cnf = self.config.clone();
         let source_path=match key.len(){

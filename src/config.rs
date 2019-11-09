@@ -1,4 +1,4 @@
-// Copyright
+// Copyright © Shaipe
 //! oss对接配置提供存入静态缓存中
 
 

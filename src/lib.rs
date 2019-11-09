@@ -1,4 +1,4 @@
-// Copyright
+// Copyright © Shaipe
 //! aliyun oss sdk for Rust
 //! 
 
@@ -12,7 +12,9 @@ pub mod config;
 mod client;
 mod base64;
 mod utils;
-mod bucket;
+pub mod bucket;
+// pub use bucket::put_object;
+
 pub mod service;
 // mod md5;
 
