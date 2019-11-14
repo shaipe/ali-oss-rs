@@ -81,7 +81,8 @@ pub fn put_object(file_path: &str) -> Result<String, std::io::Error> {
     let mut c = AliClient::new();
     let res = c.do_request(http::Method::PUT, buf, content_type.as_str(), &key);
     match res {
-        Ok(val) => {
+        Ok(mut val) => {
+            println!("pub_object: {:?}", val.text().unwrap());
             Ok(format!("{}", val.url()))
         },
         Err(e) => {return Err(std::io::Error::new(std::io::ErrorKind::Other, format!("put object error {}", e)));}
