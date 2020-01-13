@@ -103,7 +103,7 @@ pub fn del_object(key: &str) -> String {
 
 /// 删除多个文件对象
 /// param1: 对象路径集合 [&str]
-pub fn del_mult_object(keys: Vec<&str>) -> String {
+pub fn del_mult_object(keys: &Vec<String>) -> String {
     let mut c = AliClient::new();
     let mut v:Vec<String>=Vec::new();
     for key in keys{
