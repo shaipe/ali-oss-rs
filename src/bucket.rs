@@ -107,10 +107,19 @@ pub fn del_mult_object(keys: &Vec<String>) -> String {
     let mut c = AliClient::new();
     let mut v:Vec<String>=Vec::new();
     for key in keys{
-        v.push(format!("
-    <Object> 
-        <Key>{}</Key> 
-    </Object>",key));
+        if key.starts_with("/") {
+            v.push(format!("
+            <Object> 
+                <Key>{}</Key> 
+            </Object>",&key[1..]));
+        }
+        else{
+            v.push(format!("
+            <Object> 
+                <Key>{}</Key> 
+            </Object>",key));
+        }
+
     }
     //Quiet=false 关闭简单响应模式
    let data= format!("<?xml version='1.0' encoding='UTF-8'?>
@@ -119,7 +128,9 @@ pub fn del_mult_object(keys: &Vec<String>) -> String {
     {}
     </Delete>
     ",v.join(""));
+    println!("{:?}",data);
     let res = c.do_request(http::Method::POST, data.as_bytes().to_vec(), "", "/?delete");
+    //print!("{:?}", res);
     let xml = res.unwrap().text().unwrap();
     print!("{:?}", xml);
     xml

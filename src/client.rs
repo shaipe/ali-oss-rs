@@ -25,13 +25,12 @@ impl AliClient{
             config: get_oss_config()
         }
     }
-
     /// 执行请求
-    pub fn do_request(&mut self, method: Method,content:Vec<u8>,content_type:&str,key:&str) -> Result<reqwest::Response, reqwest::Error> {
+    pub fn do_request(&mut self, method: Method,content:Vec<u8>,content_type:&str,queryParams:&str) -> Result<reqwest::Response, reqwest::Error> {
         let cnf = self.config.clone();
-        let source_path=match key.len(){
+        let source_path=match queryParams.len(){
             0=>String::from("/"),
-            _=>format!("{}",key)
+            _=>format!("{}",queryParams)
         };
         let url = format!("{}://{}{}", cnf.scheme, cnf.endpoint,source_path);
 
@@ -75,7 +74,7 @@ impl AliClient{
         let resource =utils::get_resource(&self.config.bucket_name, "", "",source_path);
         // VERB, Content-MD5, Content-Type, Date, CanonicalizedOSSHeaders, CanonicalizedResource
         let sign_str = format!("{}\n{}\n{}\n{}\n{}{}", method, content_md5, content_type, now_gmt.clone(), "", resource);
-        // println!("sign_str={:?}",sign_str);
+         println!("sign_str={:?}",sign_str);
         let authorization_str = format!("OSS {}:{}", self.config.access_key_id, utils::content_sha1(&self.config.access_key_secret, &sign_str));
         headers.insert(OSSHeaders::ContentMD5.as_str(), content_md5.parse().unwrap());
         headers.insert(OSSHeaders::ContentType.as_str(), content_type.parse().unwrap());

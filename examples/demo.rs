@@ -13,9 +13,9 @@ fn main() {
     //bucket::put_object(r#"E:\rust\ali-oss-rs\QQ图片20190718094751.jpg"#);
 
     //删除
-    //bucket::del_object(r#"/picture/QQ图片20190718094751.jpg"#);
+    let path=r#"/userfiles/supplier880/20200114/b7acc3d08a274b5086f198d68b802cae.png"#;
+    // bucket::del_object(path);
     let mut v:Vec<String>=Vec::new();
-    let path=r#"/picture/QQ图片20190718094751.jpg"#;
     v.push(path.to_owned());
     bucket::del_mult_object(&v);
 }
