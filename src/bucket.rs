@@ -128,11 +128,11 @@ pub fn del_mult_object(keys: &Vec<String>) -> String {
     {}
     </Delete>
     ",v.join(""));
-    println!("{:?}",data);
+    // println!("{:?}",data);
     let res = c.do_request(http::Method::POST, data.as_bytes().to_vec(), "", "/?delete");
     //print!("{:?}", res);
     let xml = res.unwrap().text().unwrap();
-    print!("{:?}", xml);
+    // print!("{:?}", xml);
     xml
 }
 
