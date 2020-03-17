@@ -11,6 +11,7 @@ use std::fs::File;
 // OSS配置信息
 #[derive(Debug, Clone, Deserialize)]
 pub struct OSSConfig {
+    pub enable: bool,
     pub endpoint: String,
     pub access_key_id: String,
     pub access_key_secret: String,
@@ -22,6 +23,7 @@ pub struct OSSConfig {
 impl Default for OSSConfig {
     fn default() -> Self {
         OSSConfig{
+            enable: false,
             endpoint: String::new(),
             access_key_id: String::new(),
             access_key_secret: String::new(),
@@ -79,6 +81,7 @@ pub fn get_oss_config() -> OSSConfig {
     let cnf = match cache.get("oss_config") {
         Some(val) => val.clone(),
         _ => OSSConfig{
+            enable: false,
             endpoint: String::new(),
             access_key_id: String::new(),
             access_key_secret: String::new(),
