@@ -8,11 +8,10 @@ use crate::base64;
 #[allow(dead_code)]
 pub fn text_md5(text: &str) -> String {
     use md5::{Md5, Digest};
-    use md5::digest::FixedOutput;
     let mut m = Md5::default();
-    m.input(text.as_bytes());
+    m.update(text.as_bytes());
     // 获取原固定的128位的u8
-    let digest = m.fixed_result();
+    let digest = m.finalize();
     base64::encode(&digest)
 }
 
@@ -20,11 +19,10 @@ pub fn text_md5(text: &str) -> String {
 /// param1: bytes
 pub fn content_md5(bytes: &Vec<u8>) -> String {
     use md5::{Md5, Digest};
-    use md5::digest::FixedOutput;
     let mut m = Md5::default();
-    m.input(bytes);
+    m.update(bytes);
     // 获取原固定的128位的u8
-    let digest = m.fixed_result();
+    let digest = m.finalize();
     base64::encode(&digest)
 }
 

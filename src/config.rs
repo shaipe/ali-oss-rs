@@ -5,7 +5,7 @@
 use std::collections::HashMap; 
 use std::sync::Mutex;
 use std::io::prelude::*;
-use serde::Deserialize;
+use serde_derive::Deserialize;
 use std::fs::File;
 
 // OSS配置信息
